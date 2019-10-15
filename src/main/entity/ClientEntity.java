@@ -11,6 +11,7 @@ public class ClientEntity {
     private String address;
     private String phone;
     private String email;
+    private CourseSessionEntity courseSession;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -98,5 +99,15 @@ public class ClientEntity {
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "course_session_id", referencedColumnName = "id", nullable = false)
+    public CourseSessionEntity getCourseSession() {
+        return courseSession;
+    }
+
+    public void setCourseSession(CourseSessionEntity courseSession) {
+        this.courseSession = courseSession;
     }
 }

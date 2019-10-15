@@ -1,12 +1,14 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "course", schema = "public", catalog = "lo54")
 public class CourseEntity {
     private String code;
     private String title;
+    private Collection<CourseSessionEntity> courseSessions;
 
     @Id
     @Column(name = "code", nullable = false, length = -1)
@@ -46,5 +48,14 @@ public class CourseEntity {
         int result = code != null ? code.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "course")
+    public Collection<CourseSessionEntity> getCourseSessions() {
+        return courseSessions;
+    }
+
+    public void setCourseSessions(Collection<CourseSessionEntity> courseSessions) {
+        this.courseSessions = courseSessions;
     }
 }

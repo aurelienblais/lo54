@@ -2,6 +2,7 @@ package entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 @Table(name = "course_session", schema = "public", catalog = "lo54")
@@ -10,6 +11,9 @@ public class CourseSessionEntity {
     private Timestamp startDate;
     private Timestamp endDate;
     private Integer max;
+    private CourseEntity course;
+    private Collection<ClientEntity> clients;
+    private LocationEntity location;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -73,5 +77,34 @@ public class CourseSessionEntity {
         result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         result = 31 * result + (max != null ? max.hashCode() : 0);
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "course_code", referencedColumnName = "code", nullable = false)
+    public CourseEntity getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseEntity course) {
+        this.course = course;
+    }
+
+    @OneToMany(mappedBy = "courseSession")
+    public Collection<ClientEntity> getClients() {
+        return clients;
+    }
+
+    public void setClients(Collection<ClientEntity> clients) {
+        this.clients = clients;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "location_id", referencedColumnName = "id", nullable = false)
+    public LocationEntity getLocation() {
+        return location;
+    }
+
+    public void setLocation(LocationEntity location) {
+        this.location = location;
     }
 }

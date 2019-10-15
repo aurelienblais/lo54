@@ -14,3 +14,12 @@ services:
       interval: 5s
       timeout: 10s
       retries: 12
+  redis:
+    image: 'bitnami/redis:latest'
+    container_name: lo54_redis
+    ports:
+      - "6379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./data/redis/data:/bitnami/redis/data
