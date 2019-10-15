@@ -25,7 +25,7 @@ public class Main {
     public static void main(final String[] args) throws Exception {
         final Session session = getSession();
         try {
-            ClientEntity c = session.load(ClientEntity.class,3);
+            ClientEntity c = session.load(ClientEntity.class, 3);
             System.out.println(c.getEmail());
             System.out.println(c.getCourseSession().getStartDate());
             System.out.println(c.getCourseSession().getCourse().getTitle());
