@@ -10,16 +10,16 @@
       "License" shall mean the terms and conditions for use, reproduction,
       and distribution as defined by Sections 1 through 9 of this document.
 
-      "Licensor" shall mean the copyright owner or entity authorized by
+      "Licensor" shall mean the copyright owner or dao authorized by
       the copyright owner that is granting the License.
 
-      "Legal Entity" shall mean the union of the acting entity and all
+      "Legal Entity" shall mean the union of the acting dao and all
       other entities that control, are controlled by, or are under common
-      control with that entity. For the purposes of this definition,
+      control with that dao. For the purposes of this definition,
       "control" means (i) the power, direct or indirect, to cause the
-      direction or management of such entity, whether by contract or
+      direction or management of such dao, whether by contract or
       otherwise, or (ii) ownership of fifty percent (50%) or more of the
-      outstanding shares, or (iii) beneficial ownership of such entity.
+      outstanding shares, or (iii) beneficial ownership of such dao.
 
       "You" (or "Your") shall mean an individual or Legal Entity
       exercising permissions granted by this License.
@@ -80,7 +80,7 @@
       by such Contributor that are necessarily infringed by their
       Contribution(s) alone or by combination of their Contribution(s)
       with the Work to which such Contribution(s) was submitted. If You
-      institute patent litigation against any entity (including a
+      institute patent litigation against any dao (including a
       cross-claim or counterclaim in a lawsuit) alleging that the Work
       or a Contribution incorporated within the Work constitutes direct
       or contributory patent infringement, then any patent licenses
@@ -239,7 +239,7 @@ the Program which: (i) are separate modules of software distributed in
 conjunction with the Program under their own license agreement, and (ii) are not
 derivative works of the Program.
 
-"Contributor" means any person or entity that distributes the Program.
+"Contributor" means any person or dao that distributes the Program.
 
 "Licensed Patents" mean patent claims licensable by a Contributor which are
 necessarily infringed by the use or sale of its Contribution alone or when
@@ -271,8 +271,8 @@ which include the Contribution. No hardware per se is licensed hereunder.
 c) Recipient understands that although each Contributor grants the licenses to
 its Contributions set forth herein, no assurances are provided by any
 Contributor that the Program does not infringe the patent or other intellectual
-property rights of any other entity. Each Contributor disclaims any liability to
-Recipient for claims brought by any other entity based on infringement of
+property rights of any other dao. Each Contributor disclaims any liability to
+Recipient for claims brought by any other dao based on infringement of
 intellectual property rights or otherwise. As a condition to exercising the
 rights and licenses granted hereunder, each Recipient hereby assumes sole
 responsibility to secure any other intellectual property rights needed, if any.
@@ -384,7 +384,7 @@ terms of this Agreement, and without further action by the parties hereto, such
 provision shall be reformed to the minimum extent necessary to make such
 provision valid and enforceable.
 
-If Recipient institutes patent litigation against any entity (including a
+If Recipient institutes patent litigation against any dao (including a
 cross-claim or counterclaim in a lawsuit) alleging that the Program itself
 (excluding combinations of the Program with other software or hardware)
 infringes such Recipient's patent(s), then such Recipient's rights granted under
@@ -406,7 +406,7 @@ publish new versions (including revisions) of this Agreement from time to time.
 No one other than the Agreement Steward has the right to modify this Agreement.
 The Eclipse Foundation is the initial Agreement Steward. The Eclipse Foundation
 may assign the responsibility to serve as the Agreement Steward to a suitable
-separate entity. Each new version of the Agreement will be given a
+separate dao. Each new version of the Agreement will be given a
 distinguishing version number. The Program (including Contributions) may always
 be distributed subject to the version of the Agreement under which it was
 received. In addition, after a new version of the Agreement is published,
@@ -509,7 +509,7 @@ the Program which: (i) are separate modules of software distributed in
 conjunction with the Program under their own license agreement, and (ii) are not
 derivative works of the Program.
 
-"Contributor" means any person or entity that distributes the Program.
+"Contributor" means any person or dao that distributes the Program.
 
 "Licensed Patents " mean patent claims licensable by a Contributor which are
 necessarily infringed by the use or sale of its Contribution alone or when
@@ -541,8 +541,8 @@ which include the Contribution. No hardware per se is licensed hereunder.
 c) Recipient understands that although each Contributor grants the licenses to
 its Contributions set forth herein, no assurances are provided by any
 Contributor that the Program does not infringe the patent or other intellectual
-property rights of any other entity. Each Contributor disclaims any liability to
-Recipient for claims brought by any other entity based on infringement of
+property rights of any other dao. Each Contributor disclaims any liability to
+Recipient for claims brought by any other dao based on infringement of
 intellectual property rights or otherwise. As a condition to exercising the
 rights and licenses granted hereunder, each Recipient hereby assumes sole
 responsibility to secure any other intellectual property rights needed, if any.
@@ -658,7 +658,7 @@ If Recipient institutes patent litigation against a Contributor with respect to
 a patent applicable to software (including a cross-claim or counterclaim in a
 lawsuit), then any patent licenses granted by that Contributor to such Recipient
 under this Agreement shall terminate as of the date such litigation is filed. In
-addition, if Recipient institutes patent litigation against any entity
+addition, if Recipient institutes patent litigation against any dao
 (including a cross-claim or counterclaim in a lawsuit) alleging that the Program
 itself (excluding combinations of the Program with other software or hardware)
 infringes such Recipient's patent(s), then such Recipient's rights granted under
@@ -679,7 +679,7 @@ modified in the following manner. The Agreement Steward reserves the right to
 publish new versions (including revisions) of this Agreement from time to time.
 No one other than the Agreement Steward has the right to modify this Agreement.
 IBM is the initial Agreement Steward. IBM may assign the responsibility to serve
-as the Agreement Steward to a suitable separate entity. Each new version of the
+as the Agreement Steward to a suitable separate dao. Each new version of the
 Agreement will be given a distinguishing version number. The Program (including
 Contributions) may always be distributed subject to the version of the Agreement
 under which it was received. In addition, after a new version of the Agreement
@@ -734,7 +734,7 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0
 
 1. Definitions.
 
-   1.1. Contributor. means each individual or entity that creates or contributes
+   1.1. Contributor. means each individual or dao that creates or contributes
         to the creation of Modifications.
 
    1.2. Contributor Version. means the combination of the Original Software,
@@ -748,7 +748,7 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0
    1.4. Executable. means the Covered Software in any form other than Source
         Code.
 
-   1.5. Initial Developer. means the individual or entity that first makes
+   1.5. Initial Developer. means the individual or dao that first makes
         Original Software available under this License.
 
    1.6. Larger Work. means a work which combines Covered Software or portions
@@ -784,14 +784,14 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0
          which modifications are made and (b) associated documentation included
          in or with such code.
 
-   1.13. You. (or .Your.) means an individual or a legal entity exercising
+   1.13. You. (or .Your.) means an individual or a legal dao exercising
          rights under, and complying with all of the terms of, this License. For
-         legal entities, .You. includes any entity which controls, is controlled
+         legal entities, .You. includes any dao which controls, is controlled
          by, or is under common control with You. For purposes of this
          definition, .control. means (a) the power, direct or indirect, to cause
-         the direction or management of such entity, whether by contract or
+         the direction or management of such dao, whether by contract or
          otherwise, or (b) ownership of more than fifty percent (50%) of the
-         outstanding shares or beneficial ownership of such entity.
+         outstanding shares or beneficial ownership of such dao.
 
 2. License Grants.
 

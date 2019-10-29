@@ -1,5 +1,9 @@
 package servlet;
 
+import com.google.gson.Gson;
+import entity.ClientEntity;
+import entity.CourseEntity;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,12 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/DemoServlet")
-public class DemoServlet extends HttpServlet {
+@WebServlet("/api/clients")
+public class ClientsApi extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+        response.setContentType("text/json");
         PrintWriter out = response.getWriter();
-        out.println("<h3>Hello World!</h3>");
+
+        Gson gson = new Gson();
+        out.println(gson.toJson(ClientEntity.getAll()));
     }
 }
