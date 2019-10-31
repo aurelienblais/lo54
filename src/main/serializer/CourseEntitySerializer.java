@@ -1,13 +1,13 @@
 package serializer;
 
 import com.google.gson.*;
-import dao.CourseDAO;
+import entity.CourseEntity;
 
 import java.lang.reflect.Type;
 
-public class CourseDAOSerializer implements JsonSerializer<CourseDAO> {
+public class CourseEntitySerializer implements JsonSerializer<CourseEntity> {
     @Override
-    public JsonElement serialize(CourseDAO course, Type type, JsonSerializationContext jsonSerializationContext) {
+    public JsonElement serialize(CourseEntity course, Type type, JsonSerializationContext jsonSerializationContext) {
         System.out.println(type.getTypeName());
         JsonObject object = new JsonObject();
         object.addProperty("code", course.getCode());

@@ -10,9 +10,9 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.connection.username">postgres</property>
 
-        <mapping class="dao.ClientDAO"/>
-        <mapping class="dao.CourseDAO"/>
-        <mapping class="dao.CourseSessionDAO"/>
-        <mapping class="dao.LocationDAO"/>
+        <mapping class="entity.ClientEntity"/>
+        <mapping class="entity.CourseEntity"/>
+        <mapping class="entity.CourseSessionEntity"/>
+        <mapping class="entity.LocationEntity"/>
     </session-factory>
 </hibernate-configuration>

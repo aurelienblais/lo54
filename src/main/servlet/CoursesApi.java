@@ -1,7 +1,7 @@
 package servlet;
 
 import com.google.gson.Gson;
-import entity.CourseEntity;
+import repository.CourseRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +19,6 @@ public class CoursesApi extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         Gson gson = new Gson();
-        out.println(gson.toJson(CourseEntity.getAll()));
+        out.println(gson.toJson(CourseRepository.getAll()));
     }
 }

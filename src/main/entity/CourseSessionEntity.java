@@ -1,8 +1,7 @@
-package dao;
+package entity;
 
 import com.google.gson.annotations.JsonAdapter;
-import serializer.CourseDAOSerializer;
-import serializer.CourseSessionDAOSerializer;
+import serializer.CourseSessionEntitySerializer;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,15 +9,15 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "course_session", schema = "public", catalog = "lo54")
-@JsonAdapter(CourseSessionDAOSerializer.class)
-public class CourseSessionDAO {
+@JsonAdapter(CourseSessionEntitySerializer.class)
+public class CourseSessionEntity {
     private int id;
     private Timestamp startDate;
     private Timestamp endDate;
     private Integer max;
-    private CourseDAO course;
-    private Collection<ClientDAO> clients;
-    private LocationDAO location;
+    private CourseEntity course;
+    private Collection<ClientEntity> clients;
+    private LocationEntity location;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -65,7 +64,7 @@ public class CourseSessionDAO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CourseSessionDAO that = (CourseSessionDAO) o;
+        CourseSessionEntity that = (CourseSessionEntity) o;
 
         if (id != that.id) return false;
         if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) return false;
@@ -86,30 +85,30 @@ public class CourseSessionDAO {
 
     @ManyToOne
     @JoinColumn(name = "course_code", referencedColumnName = "code", nullable = false)
-    public CourseDAO getCourse() {
+    public CourseEntity getCourse() {
         return course;
     }
 
-    public void setCourse(CourseDAO course) {
+    public void setCourse(CourseEntity course) {
         this.course = course;
     }
 
     @OneToMany(mappedBy = "courseSession")
-    public Collection<ClientDAO> getClients() {
+    public Collection<ClientEntity> getClients() {
         return clients;
     }
 
-    public void setClients(Collection<ClientDAO> clients) {
+    public void setClients(Collection<ClientEntity> clients) {
         this.clients = clients;
     }
 
     @ManyToOne
     @JoinColumn(name = "location_id", referencedColumnName = "id", nullable = false)
-    public LocationDAO getLocation() {
+    public LocationEntity getLocation() {
         return location;
     }
 
-    public void setLocation(LocationDAO location) {
+    public void setLocation(LocationEntity location) {
         this.location = location;
     }
 }

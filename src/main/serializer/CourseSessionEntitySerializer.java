@@ -1,14 +1,14 @@
 package serializer;
 
 import com.google.gson.*;
-import dao.CourseSessionDAO;
+import entity.CourseSessionEntity;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 
-public class CourseSessionDAOSerializer implements JsonSerializer<CourseSessionDAO> {
+public class CourseSessionEntitySerializer implements JsonSerializer<CourseSessionEntity> {
     @Override
-    public JsonElement serialize(CourseSessionDAO courseSession, Type type, JsonSerializationContext jsonSerializationContext) {
+    public JsonElement serialize(CourseSessionEntity courseSession, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject object = new JsonObject();
         object.addProperty("id", courseSession.getId());
         object.addProperty("startDate", new SimpleDateFormat("dd-mm-YYYY:hh:ss").format(courseSession.getStartDate()));

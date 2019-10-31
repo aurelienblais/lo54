@@ -1,8 +1,7 @@
 package servlet;
 
 import com.google.gson.Gson;
-import entity.ClientEntity;
-import entity.CourseEntity;
+import repository.ClientRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +19,6 @@ public class ClientsApi extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         Gson gson = new Gson();
-        out.println(gson.toJson(ClientEntity.getAll()));
+        out.println(gson.toJson(ClientRepository.getAll()));
     }
 }

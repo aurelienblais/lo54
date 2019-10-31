@@ -1,18 +1,18 @@
-package dao;
+package entity;
 
 import com.google.gson.annotations.JsonAdapter;
-import serializer.LocationDAOSerializer;
+import serializer.LocationEntitySerializer;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(name = "location", schema = "public", catalog = "lo54")
-@JsonAdapter(LocationDAOSerializer.class)
-public class LocationDAO {
+@JsonAdapter(LocationEntitySerializer.class)
+public class LocationEntity {
     private int id;
     private String city;
-    private Collection<CourseSessionDAO> courseSessions;
+    private Collection<CourseSessionEntity> courseSessions;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -39,7 +39,7 @@ public class LocationDAO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        LocationDAO that = (LocationDAO) o;
+        LocationEntity that = (LocationEntity) o;
 
         if (id != that.id) return false;
         if (city != null ? !city.equals(that.city) : that.city != null) return false;
@@ -55,11 +55,11 @@ public class LocationDAO {
     }
 
     @OneToMany(mappedBy = "location")
-    public Collection<CourseSessionDAO> getCourseSessions() {
+    public Collection<CourseSessionEntity> getCourseSessions() {
         return courseSessions;
     }
 
-    public void setCourseSessions(Collection<CourseSessionDAO> courseSessions) {
+    public void setCourseSessions(Collection<CourseSessionEntity> courseSessions) {
         this.courseSessions = courseSessions;
     }
 }
