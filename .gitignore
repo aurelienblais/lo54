@@ -2,3 +2,4 @@ data/
 lib/
 target/
 out/
+.DS_Store
