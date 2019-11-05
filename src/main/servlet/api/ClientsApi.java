@@ -1,4 +1,4 @@
-package servlet;
+package servlet.api;
 
 import com.google.gson.Gson;
 import repository.ClientRepository;

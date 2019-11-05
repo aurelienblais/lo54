@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CourseRepository {
     public static CourseEntity getById(String id) {
-        return SessionProvider.getSession().load(CourseEntity.class, id);
+        return SessionProvider.getSession().get(CourseEntity.class, id);
     }
 
     public static List<CourseEntity> getAll() {

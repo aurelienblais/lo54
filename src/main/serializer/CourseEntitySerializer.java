@@ -11,7 +11,7 @@ public class CourseEntitySerializer implements JsonSerializer<CourseEntity> {
         System.out.println(type.getTypeName());
         JsonObject object = new JsonObject();
         object.addProperty("code", course.getCode());
-        object.addProperty("name", course.getTitle());
+        object.addProperty("title", course.getTitle());
         object.add("course_sessions", new Gson().toJsonTree(course.getCourseSessions()));
         return object;
     }
