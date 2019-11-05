@@ -18,6 +18,7 @@ public class ClientEntity {
     private CourseSessionEntity courseSession;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -106,7 +107,7 @@ public class ClientEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "course_session_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "course_session_id", referencedColumnName = "id")
     public CourseSessionEntity getCourseSession() {
         return courseSession;
     }

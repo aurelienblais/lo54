@@ -1,7 +1,7 @@
-package servlet.api.client;
+package servlet.api.course;
 
 import com.google.gson.Gson;
-import repository.ClientRepository;
+import repository.CourseRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/api/client/*")
-public class Show extends HttpServlet {
+@WebServlet("/api/courses")
+public class Collection extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/json");
         PrintWriter out = response.getWriter();
 
         Gson gson = new Gson();
-        out.println(gson.toJson(ClientRepository.getById(Integer.parseInt(request.getPathInfo().substring(1)))));
+        out.println(gson.toJson(CourseRepository.getAll()));
     }
 }

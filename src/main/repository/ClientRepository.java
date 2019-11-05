@@ -2,6 +2,7 @@ package repository;
 
 import com.google.gson.Gson;
 import entity.ClientEntity;
+import org.hibernate.Session;
 import util.RedisProvider;
 import util.SessionProvider;
 
@@ -30,5 +31,31 @@ public class ClientRepository {
 
         TypedQuery<ClientEntity> allQuery = SessionProvider.getSession().createQuery(all);
         return allQuery.getResultList();
+    }
+
+    public static ClientEntity create(ClientEntity obj) {
+        Session session = SessionProvider.getSession();
+        session.beginTransaction();
+        session.persist(obj);
+        session.getTransaction().commit();
+        RedisProvider.getSession().set("client/" + obj.getId(), new Gson().toJson(obj));
+        return obj;
+    }
+
+    public static ClientEntity save(ClientEntity obj) {
+        Session session = SessionProvider.getSession();
+        session.beginTransaction();
+        session.merge(obj);
+        session.getTransaction().commit();
+        RedisProvider.getSession().set("client/" + obj.getId(), new Gson().toJson(obj));
+        return obj;
+    }
+
+    public static void delete(ClientEntity obj) {
+        Session session = SessionProvider.getSession();
+        session.beginTransaction();
+        session.delete(obj);
+        session.getTransaction().commit();
+        RedisProvider.getSession().del("client/" + obj.getId());
     }
 }
