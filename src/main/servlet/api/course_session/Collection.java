@@ -1,8 +1,10 @@
-package servlet.api.course;
+package servlet.api.course_session;
 
 import com.google.gson.Gson;
-import entity.CourseEntity;
+import entity.CourseSessionEntity;
 import repository.CourseRepository;
+import repository.CourseSessionRepository;
+import repository.LocationRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 
-@WebServlet("/api/courses")
+@WebServlet("/api/course_sessions")
 public class Collection extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,18 +23,22 @@ public class Collection extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         Gson gson = new Gson();
-        out.println(gson.toJson(CourseRepository.getAll()));
+        out.println(gson.toJson(CourseSessionRepository.getAll()));
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/json");
         PrintWriter out = response.getWriter();
 
-        CourseEntity obj = new CourseEntity();
-        obj.setCode(request.getParameter("code"));
-        obj.setTitle(request.getParameter("title"));
+        CourseSessionEntity obj = new CourseSessionEntity();
+        obj.setStartDate(Timestamp.valueOf(request.getParameter("start_date")));
+        obj.setEndDate(Timestamp.valueOf(request.getParameter("end_date")));
+        obj.setMax(Integer.valueOf(request.getParameter("max")));
+        obj.setCourse(CourseRepository.getById(request.getParameter("course_code")));
+        obj.setLocation(LocationRepository.getById(Integer.valueOf(request.getParameter("location_id"))));
 
-        obj = CourseRepository.create(obj);
+
+        obj = CourseSessionRepository.create(obj);
         Gson gson = new Gson();
         out.println(gson.toJson(obj));
     }

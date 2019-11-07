@@ -70,9 +70,7 @@ public class CourseSessionEntity {
         if (id != that.id) return false;
         if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) return false;
         if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) return false;
-        if (max != null ? !max.equals(that.max) : that.max != null) return false;
-
-        return true;
+        return max != null ? max.equals(that.max) : that.max == null;
     }
 
     @Override

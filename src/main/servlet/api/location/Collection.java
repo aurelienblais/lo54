@@ -1,8 +1,8 @@
-package servlet.api.course;
+package servlet.api.location;
 
 import com.google.gson.Gson;
-import entity.CourseEntity;
-import repository.CourseRepository;
+import entity.LocationEntity;
+import repository.LocationRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/api/courses")
+@WebServlet("/api/locations")
 public class Collection extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,18 +20,17 @@ public class Collection extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         Gson gson = new Gson();
-        out.println(gson.toJson(CourseRepository.getAll()));
+        out.println(gson.toJson(LocationRepository.getAll()));
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/json");
         PrintWriter out = response.getWriter();
 
-        CourseEntity obj = new CourseEntity();
-        obj.setCode(request.getParameter("code"));
-        obj.setTitle(request.getParameter("title"));
+        LocationEntity obj = new LocationEntity();
+        obj.setCity(request.getParameter("city"));
 
-        obj = CourseRepository.create(obj);
+        obj = LocationRepository.create(obj);
         Gson gson = new Gson();
         out.println(gson.toJson(obj));
     }

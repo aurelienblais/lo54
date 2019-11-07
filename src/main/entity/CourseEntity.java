@@ -42,9 +42,7 @@ public class CourseEntity {
         CourseEntity that = (CourseEntity) o;
 
         if (code != null ? !code.equals(that.code) : that.code != null) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-
-        return true;
+        return title != null ? title.equals(that.title) : that.title == null;
     }
 
     @Override

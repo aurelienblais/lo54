@@ -13,13 +13,13 @@ public abstract class BaseElement extends HttpServlet {
             doPatch(request, response);
         } else if (request.getMethod().equalsIgnoreCase("DELETE")) {
             doDelete(request, response);
-        }
-        else {
+        } else {
             super.service(request, response);
         }
     }
 
     public abstract void doPatch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+
     public abstract void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
 }

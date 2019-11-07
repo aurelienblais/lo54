@@ -90,9 +90,7 @@ public class ClientEntity {
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
         if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-
-        return true;
+        return email != null ? email.equals(that.email) : that.email == null;
     }
 
     @Override

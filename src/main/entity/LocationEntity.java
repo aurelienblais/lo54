@@ -43,9 +43,7 @@ public class LocationEntity {
         LocationEntity that = (LocationEntity) o;
 
         if (id != that.id) return false;
-        if (city != null ? !city.equals(that.city) : that.city != null) return false;
-
-        return true;
+        return city != null ? city.equals(that.city) : that.city == null;
     }
 
     @Override
