@@ -21,8 +21,8 @@ import static redis.clients.jedis.ScanParams.SCAN_POINTER_START;
 
 public abstract class BaseRepository {
     static <T extends BaseEntity> T getById(Serializable id, Class target) {
-        if (RedisProvider.getSession().exists(target.getSimpleName() + id)) {
-            return fromRedis(target.getSimpleName() + id, target);
+        if (RedisProvider.getSession().exists(target.getSimpleName() + "/" + id)) {
+            return fromRedis(target.getSimpleName() + "/" + id, target);
         } else {
             Session session = SessionProvider.getSession();
             T entity = (T) session.get(target, id);
@@ -34,7 +34,7 @@ public abstract class BaseRepository {
 
     static <T extends BaseEntity> List<T> getAll(Class target) {
         List<T> list = new ArrayList<>();
-        ScanParams scanParams = new ScanParams().count(100).match(target.getSimpleName() + "*");
+        ScanParams scanParams = new ScanParams().count(100).match(target.getSimpleName() + "/*");
         String cur = SCAN_POINTER_START;
         do {
             ScanResult<String> scanResult = RedisProvider.getSession().scan(cur, scanParams);
@@ -78,7 +78,7 @@ public abstract class BaseRepository {
         session.beginTransaction();
         session.delete(obj);
         session.getTransaction().commit();
-        RedisProvider.getSession().del(obj.getClass().getSimpleName() + obj.getId());
+        RedisProvider.getSession().del(obj.getClass().getSimpleName() + "/" + obj.getId());
     }
 
     static <T extends BaseEntity> T fromRedis(String k, Class target) {
@@ -86,6 +86,6 @@ public abstract class BaseRepository {
     }
 
     public static void toRedis(BaseEntity obj) {
-        RedisProvider.getSession().set(obj.getClass().getSimpleName() + obj.getId(), new Gson().toJson(obj));
+        RedisProvider.getSession().set(obj.getClass().getSimpleName() + "/" + obj.getId(), new Gson().toJson(obj));
     }
 }
