@@ -5,6 +5,7 @@ import serializer.ClientEntitySerializer;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashMap;
 
 @Entity
 @Table(name = "client", schema = "public", catalog = "lo54")

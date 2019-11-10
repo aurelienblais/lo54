@@ -22,6 +22,7 @@ public class RedisInitializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
         // We use Postgres for persistence, but we need to ensure Redis is sync with it
+
         System.out.println("--------------------");
         System.out.println("Load Data into Redis");
         System.out.println("--------------------");

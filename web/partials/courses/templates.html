@@ -3,8 +3,8 @@
         <th scope="row">{{code}}</th>
         <td>{{title}}</td>
         <td>
-            <button type="button" class="btn btn-info" onclick="showCourse('{{code}}')">
-                <i class="far fa-eye"></i>
+            <button type="button" class="btn btn-sm btn-info" onclick="showCourse('{{code}}')">
+                <i class="far fa-eye"></i> {{courseSessions.length}} session(s)
             </button>
         </td>
     </tr>
@@ -37,7 +37,11 @@
                             <th scope="row">{{location.city}}</th>
                             <td>{{dateFormat startDate}}</td>
                             <td>{{dateFormat endDate}}</td>
-                            <td>{{clients.length}}/{{max}}</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: {{percentage clients.length max}}%">{{clients.length}}/{{max}}</div>
+                                </div>
+                            </td>
                         </tr>
                         {{/each}}
                         </tbody>

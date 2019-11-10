@@ -28,7 +28,9 @@ public class CourseEntity extends BaseEntity implements Serializable {
     // For compatibility with other entities
     @Override
     @Transient
-    public String getId() { return getCode(); }
+    public String getId() {
+        return getCode();
+    }
 
     @Basic
     @Column(name = "title", nullable = false, length = -1)

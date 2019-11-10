@@ -7,16 +7,7 @@
 </head>
 <body class="bg-light">
 <div class="container">
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="courses-tab" data-toggle="tab" href="#courses" role="tab">Cours</a>
-        </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="courses" role="tabpanel">
-            <%@ include file="partials/courses/list.jsp" %>
-        </div>
-    </div>
+    <%@ include file="partials/courses/list.jsp" %>
 </div>
 
 <%@ include file="partials/courses/templates.html" %>
@@ -26,6 +17,7 @@
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/handlebars-latest.js"></script>
 <script src="https://kit.fontawesome.com/86ec1904d0.js" crossorigin="anonymous"></script>
+<script src="assets/js/jquery.typewatch.js"></script>
 
 <script src="assets/js/courses.js"></script>
 <script src="assets/js/global.js"></script>
