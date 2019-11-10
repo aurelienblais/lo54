@@ -4,13 +4,14 @@ import com.google.gson.annotations.JsonAdapter;
 import serializer.CourseSessionEntitySerializer;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
 @Table(name = "course_session", schema = "public", catalog = "lo54")
 @JsonAdapter(CourseSessionEntitySerializer.class)
-public class CourseSessionEntity {
+public class CourseSessionEntity extends BaseEntity implements Serializable {
     private int id;
     private Timestamp startDate;
     private Timestamp endDate;
@@ -22,7 +23,7 @@ public class CourseSessionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

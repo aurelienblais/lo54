@@ -4,12 +4,13 @@ import com.google.gson.annotations.JsonAdapter;
 import serializer.CourseEntitySerializer;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
 @Table(name = "course", schema = "public", catalog = "lo54")
 @JsonAdapter(CourseEntitySerializer.class)
-public class CourseEntity {
+public class CourseEntity extends BaseEntity implements Serializable {
     private String code;
     private String title;
     private Collection<CourseSessionEntity> courseSessions;
@@ -23,6 +24,11 @@ public class CourseEntity {
     public void setCode(String code) {
         this.code = code;
     }
+
+    // For compatibility with other entities
+    @Override
+    @Transient
+    public String getId() { return getCode(); }
 
     @Basic
     @Column(name = "title", nullable = false, length = -1)

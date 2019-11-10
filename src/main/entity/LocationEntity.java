@@ -4,12 +4,13 @@ import com.google.gson.annotations.JsonAdapter;
 import serializer.LocationEntitySerializer;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
 @Table(name = "location", schema = "public", catalog = "lo54")
 @JsonAdapter(LocationEntitySerializer.class)
-public class LocationEntity {
+public class LocationEntity extends BaseEntity implements Serializable {
     private int id;
     private String city;
     private Collection<CourseSessionEntity> courseSessions;
@@ -17,7 +18,7 @@ public class LocationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -4,11 +4,12 @@ import com.google.gson.annotations.JsonAdapter;
 import serializer.ClientEntitySerializer;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "client", schema = "public", catalog = "lo54")
 @JsonAdapter(ClientEntitySerializer.class)
-public class ClientEntity {
+public class ClientEntity extends BaseEntity implements Serializable {
     private int id;
     private String lastname;
     private String firstname;
@@ -20,7 +21,7 @@ public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

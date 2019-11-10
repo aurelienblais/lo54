@@ -1,0 +1,49 @@
+<script id="course-row-template" type="text/x-handlebars-template">
+    <tr>
+        <th scope="row">{{code}}</th>
+        <td>{{title}}</td>
+        <td>
+            <button type="button" class="btn btn-info" onclick="showCourse('{{code}}')">
+                <i class="far fa-eye"></i>
+            </button>
+        </td>
+    </tr>
+</script>
+
+<script id="course-item-template" type="text/x-handlebars-template">
+    <div class="modal" tabindex="-1" role="dialog" id="course-modal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{code}} - {{title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h2>Sessions &agrave; venir</h2>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Ville</th>
+                            <th scope="col">D&eacute;but</th>
+                            <th scope="col">Fin</th>
+                            <th scope="col">Places</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each courseSessions}}
+                        <tr>
+                            <th scope="row">{{location.city}}</th>
+                            <td>{{dateFormat startDate}}</td>
+                            <td>{{dateFormat endDate}}</td>
+                            <td>{{clients.length}}/{{max}}</td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
