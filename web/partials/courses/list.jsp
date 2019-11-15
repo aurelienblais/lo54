@@ -5,6 +5,9 @@
     <div class="col-6">
         <input class="form-control" placeholder="Name" id="courses-filter-name"/>
     </div>
+    <div class="col-6">
+        <input class="form-control" placeholder="Date" id="courses-filter-date" type="date"/>
+    </div>
 </div>
 
 <div class="row" id="courses-container">

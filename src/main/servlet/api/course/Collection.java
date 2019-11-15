@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @WebServlet("/api/courses")
 public class Collection extends HttpServlet {
@@ -28,12 +27,20 @@ public class Collection extends HttpServlet {
         List<CourseEntity> res;
         CourseRepository cr = new CourseRepository();
 
-        if(!StringUtils.isEmpty(request.getParameter("title"))) {
+        if (!StringUtils.isEmpty(request.getParameter("title"))) {
             cr.filterTitle(request.getParameter("title"));
         }
 
-        if(!StringUtils.isEmpty(request.getParameter("code"))) {
+        if (!StringUtils.isEmpty(request.getParameter("code"))) {
             cr.filterCode(request.getParameter("code"));
+        }
+
+        if (!StringUtils.isEmpty(request.getParameter("date"))) {
+            try {
+                cr.filterSessionDate(request.getParameter("date"));
+            } catch (ParseException e) {
+                System.out.println("Failed to parse date: " + request.getParameter("date"));
+            }
         }
 
         res = cr.getAll();

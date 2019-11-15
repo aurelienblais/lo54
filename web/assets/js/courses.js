@@ -7,7 +7,8 @@ let loadCourses = () => {
     $('#courses-list').empty();
     $.getJSON('/api/courses', {
         code: $('#courses-filter-code').val(),
-        title: $('#courses-filter-name').val()
+        title: $('#courses-filter-name').val(),
+        date: $('#courses-filter-date').val()
     }, (data) => {
         data.forEach((row) => {
             $('#courses-list').append(COURSE_ROW_TEMPLATE(row));
@@ -26,5 +27,5 @@ let showCourse = (id) => {
 };
 
 $(() => {
-    $('#courses-filter-code, #courses-filter-name').typeWatch({callback: loadCourses});
+    $('#courses-filter-code, #courses-filter-name, #courses-filter-date').typeWatch({callback: loadCourses});
 });

@@ -1,15 +1,16 @@
 package repository;
 
 import entity.CourseEntity;
+import entity.CourseSessionEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.SessionProvider;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CourseRepository extends BaseRepository {
@@ -17,6 +18,7 @@ public class CourseRepository extends BaseRepository {
     private CriteriaBuilder cb;
     private CriteriaQuery<CourseEntity> cr;
     private Root<CourseEntity> root;
+    private Join<CourseEntity, CourseSessionEntity> courseSessionJoin;
     private List<Predicate> predicates;
 
     public CourseRepository() {
@@ -24,6 +26,7 @@ public class CourseRepository extends BaseRepository {
         cb = session.getCriteriaBuilder();
         cr = cb.createQuery(CourseEntity.class);
         root = cr.from(CourseEntity.class);
+        courseSessionJoin = root.join("courseSessions");
         predicates = new ArrayList<>();
     }
 
@@ -37,6 +40,17 @@ public class CourseRepository extends BaseRepository {
 
     public void filterCode(String code) {
         predicates.add(cb.like(cb.lower(root.get("code")), "%" + code.toLowerCase() + "%"));
+    }
+
+    public void filterSessionDate(String date) throws ParseException {
+        Date parsed_date = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        predicates.add(
+                cb.between(
+                        courseSessionJoin.get("startDate"),
+                        parsed_date,
+                        new Date(parsed_date.getTime() + 86400000)
+                )
+        );
     }
 
     public List<CourseEntity> getAll() {

@@ -1,19 +1,13 @@
 package util;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisProvider {
-    private static final Jedis jedis;
-
-    static {
-        try {
-            jedis = new Jedis();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
+    private static final JedisPool jedis = new JedisPool(new JedisPoolConfig(), "localhost");;
 
     public static Jedis getSession() {
-        return jedis;
+        return jedis.getResource();
     }
 }

@@ -3,6 +3,7 @@ package repository;
 import com.google.gson.Gson;
 import entity.BaseEntity;
 import org.hibernate.Session;
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.ScanParams;
 import redis.clients.jedis.ScanResult;
 import util.RedisProvider;
@@ -33,15 +34,20 @@ public abstract class BaseRepository {
     }
 
     static <T extends BaseEntity> List<T> getAll(Class target) {
-        List<T> list = new ArrayList<>();
-        ScanParams scanParams = new ScanParams().count(100).match(target.getSimpleName() + "/*");
-        String cur = SCAN_POINTER_START;
-        do {
-            ScanResult<String> scanResult = RedisProvider.getSession().scan(cur, scanParams);
-            scanResult.getResult().forEach((k) -> list.add(fromRedis(k, target)));
-            cur = scanResult.getCursor();
-        } while (!cur.equals(SCAN_POINTER_START));
-        return list;
+        Jedis jedis = RedisProvider.getSession();
+        try {
+            List<T> list = new ArrayList<>();
+            ScanParams scanParams = new ScanParams().count(100).match(target.getSimpleName() + "/*");
+            String cur = SCAN_POINTER_START;
+            do {
+                ScanResult<String> scanResult = jedis.scan(cur, scanParams);
+                scanResult.getResult().forEach((k) -> list.add(fromRedis(k, target)));
+                cur = scanResult.getCursor();
+            } while (!cur.equals(SCAN_POINTER_START));
+            return list;
+        } finally {
+            jedis.close();
+        }
     }
 
     public static <T extends BaseEntity> List<T> getAllFromDB(Class target) {
@@ -78,14 +84,33 @@ public abstract class BaseRepository {
         session.beginTransaction();
         session.delete(obj);
         session.getTransaction().commit();
-        RedisProvider.getSession().del(obj.getClass().getSimpleName() + "/" + obj.getId());
+        delRedis(obj);
     }
 
     static <T extends BaseEntity> T fromRedis(String k, Class target) {
-        return new Gson().fromJson(RedisProvider.getSession().get(k), (Type) target);
+        Jedis jedis = RedisProvider.getSession();
+        try {
+            return new Gson().fromJson(jedis.get(k), (Type) target);
+        } finally {
+            jedis.close();
+        }
     }
 
     public static void toRedis(BaseEntity obj) {
-        RedisProvider.getSession().set(obj.getClass().getSimpleName() + "/" + obj.getId(), new Gson().toJson(obj));
+        Jedis jedis = RedisProvider.getSession();
+        try {
+            jedis.set(obj.getClass().getSimpleName() + "/" + obj.getId(), new Gson().toJson(obj));
+        } finally {
+            jedis.close();
+        }
+    }
+
+    public static void delRedis(BaseEntity obj) {
+        Jedis jedis = RedisProvider.getSession();
+        try {
+            jedis.del(obj.getClass().getSimpleName() + "/" + obj.getId());
+        } finally {
+            jedis.close();
+        }
     }
 }
