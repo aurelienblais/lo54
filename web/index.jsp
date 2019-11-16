@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <title>$Title$</title>
+    <title>Courses List</title>
 
 </head>
 <body class="bg-light">

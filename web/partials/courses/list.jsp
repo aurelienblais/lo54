@@ -8,6 +8,11 @@
     <div class="col-6">
         <input class="form-control" placeholder="Date" id="courses-filter-date" type="date"/>
     </div>
+    <div class="col-6">
+        <select class="form-control" id="courses-filter-location">
+            <option></option>
+        </select>
+    </div>
 </div>
 
 <div class="row" id="courses-container">

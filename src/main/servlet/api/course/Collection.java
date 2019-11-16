@@ -43,6 +43,10 @@ public class Collection extends HttpServlet {
             }
         }
 
+        if(!StringUtils.isEmpty(request.getParameter("city"))) {
+            cr.filterCity(Integer.parseInt(request.getParameter("city")));
+        }
+
         res = cr.getAll();
         res.sort(Comparator.comparing(CourseEntity::getCode));
 

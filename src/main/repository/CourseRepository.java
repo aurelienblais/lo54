@@ -26,7 +26,6 @@ public class CourseRepository extends BaseRepository {
         cb = session.getCriteriaBuilder();
         cr = cb.createQuery(CourseEntity.class);
         root = cr.from(CourseEntity.class);
-        courseSessionJoin = root.join("courseSessions");
         predicates = new ArrayList<>();
     }
 
@@ -35,7 +34,9 @@ public class CourseRepository extends BaseRepository {
     }
 
     public void filterTitle(String title) {
-        predicates.add(cb.like(cb.lower(root.get("title")), "%" + title.toLowerCase() + "%"));
+        for (String token : title.split(" ")) {
+            predicates.add(cb.like(cb.lower(root.get("title")), "%" + token.toLowerCase() + "%"));
+        }
     }
 
     public void filterCode(String code) {
@@ -43,6 +44,8 @@ public class CourseRepository extends BaseRepository {
     }
 
     public void filterSessionDate(String date) throws ParseException {
+        if (courseSessionJoin == null)
+            courseSessionJoin = root.join("courseSessions");
         Date parsed_date = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         predicates.add(
                 cb.between(
@@ -51,6 +54,12 @@ public class CourseRepository extends BaseRepository {
                         new Date(parsed_date.getTime() + 86400000)
                 )
         );
+    }
+
+    public void filterCity(int id) {
+        if (courseSessionJoin == null)
+            courseSessionJoin = root.join("courseSessions");
+        predicates.add(cb.equal(courseSessionJoin.get("location"), id));
     }
 
     public List<CourseEntity> getAll() {
