@@ -36,7 +36,7 @@ public class Collection extends HttpServlet {
         obj.setAddress(request.getParameter("address"));
         obj.setEmail(request.getParameter("email"));
         obj.setPhone(request.getParameter("phone"));
-        obj.setCourseSession(CourseSessionRepository.getById(parseInt(request.getParameter("course_session"))));
+        obj.setCourseSession(CourseSessionRepository.getByIdFromDb(parseInt(request.getParameter("course_session"))));
 
         obj = ClientRepository.create(obj);
         Gson gson = new Gson();

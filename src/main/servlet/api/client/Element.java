@@ -23,7 +23,7 @@ public class Element extends BaseElement {
         PrintWriter out = response.getWriter();
 
         Gson gson = new Gson();
-        out.println(gson.toJson(ClientRepository.getById(Integer.parseInt(request.getPathInfo().substring(1)))));
+        out.println(gson.toJson(ClientRepository.getByIdFromDb(Integer.parseInt(request.getPathInfo().substring(1)))));
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Element extends BaseElement {
         obj.setAddress(request.getParameter("address"));
         obj.setEmail(request.getParameter("email"));
         obj.setPhone(request.getParameter("phone"));
-        obj.setCourseSession(CourseSessionRepository.getById(parseInt(request.getParameter("course_session"))));
+        obj.setCourseSession(CourseSessionRepository.getByIdFromDb(parseInt(request.getParameter("course_session"))));
 
         obj = ClientRepository.save(obj);
         Gson gson = new Gson();
@@ -46,7 +46,7 @@ public class Element extends BaseElement {
 
     @Override
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ClientEntity obj = ClientRepository.getById(Integer.parseInt(request.getPathInfo().substring(1)));
+        ClientEntity obj = ClientRepository.getByIdFromDb(Integer.parseInt(request.getPathInfo().substring(1)));
         ClientRepository.delete(obj);
     }
 }

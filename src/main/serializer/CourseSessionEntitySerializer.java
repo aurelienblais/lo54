@@ -16,6 +16,10 @@ public class CourseSessionEntitySerializer implements JsonSerializer<CourseSessi
         object.addProperty("max", courseSession.getMax());
         object.add("location", new Gson().toJsonTree(courseSession.getLocation()));
         object.add("clients", new Gson().toJsonTree(courseSession.getClients()));
+
+        // Avoid circular references
+        courseSession.getCourse().setCourseSessions(null);
+        object.add("course", new Gson().toJsonTree(courseSession.getCourse()));
         return object;
     }
 }

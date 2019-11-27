@@ -21,14 +21,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h2>Sessions &agrave; venir</h2>
+                    <h2>Upcoming sessions</h2>
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th scope="col">Ville</th>
-                            <th scope="col">D&eacute;but</th>
-                            <th scope="col">Fin</th>
-                            <th scope="col">Places</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Start date</th>
+                            <th scope="col">End date</th>
+                            <th scope="col">Slots</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -41,6 +42,11 @@
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: {{percentage clients.length max}}%">{{clients.length}}/{{max}}</div>
                                 </div>
+                            </td>
+                            <td>
+                                {{#ifCond clients.length '<' max}}
+                                    <div class="btn btn-sm btn-info" onclick="registerCourseSession({{id}})">Sign Up</div>
+                                {{/ifCond}}
                             </td>
                         </tr>
                         {{/each}}

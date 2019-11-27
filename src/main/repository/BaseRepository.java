@@ -25,12 +25,17 @@ public abstract class BaseRepository {
         if (RedisProvider.getSession().exists(target.getSimpleName() + "/" + id)) {
             return fromRedis(target.getSimpleName() + "/" + id, target);
         } else {
-            Session session = SessionProvider.getSession();
-            T entity = (T) session.get(target, id);
-            toRedis(entity);
-            session.close();
-            return entity;
+            return getByIdFromDb(id, target);
         }
+    }
+
+    static <T extends BaseEntity> T getByIdFromDb(Serializable id, Class target) {
+        Session session = SessionProvider.getSession();
+        T entity = (T) session.get(target, id);
+        toRedis(entity);
+        session.close();
+        return entity;
+
     }
 
     static <T extends BaseEntity> List<T> getAll(Class target) {

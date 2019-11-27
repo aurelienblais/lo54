@@ -1,6 +1,7 @@
 package entity;
 
 import com.google.gson.annotations.JsonAdapter;
+import org.hibernate.annotations.Where;
 import serializer.CourseEntitySerializer;
 
 import javax.persistence.*;
@@ -61,6 +62,7 @@ public class CourseEntity extends BaseEntity implements Serializable {
     }
 
     @OneToMany(mappedBy = "course")
+    @Where(clause = "start_date > current_date")
     public Collection<CourseSessionEntity> getCourseSessions() {
         return courseSessions;
     }
