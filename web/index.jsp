@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/toastr.min.css"/>
-    <title>Courses List</title>
+    <title>Super Duper School</title>
 
 </head>
 <body class="bg-light">

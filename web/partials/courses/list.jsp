@@ -8,10 +8,13 @@
     <div class="col-6">
         <input class="form-control" placeholder="Date" id="courses-filter-date" type="date"/>
     </div>
-    <div class="col-6">
+    <div class="col-5">
         <select class="form-control location-filter" id="courses-filter-location">
             <option></option>
         </select>
+    </div>
+    <div class="col-1">
+        <div class="btn btn-success" data-toggle="new-course">New</div>
     </div>
 </div>
 

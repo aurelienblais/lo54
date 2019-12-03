@@ -2,10 +2,13 @@
     <div class="col-6">
         <input class="form-control" placeholder="Start Date" id="courses-sessions-filter-date" type="date"/>
     </div>
-    <div class="col-6">
+    <div class="col-5">
         <select class="form-control location-filter" id="courses-sessions-filter-location">
             <option></option>
         </select>
+    </div>
+    <div class="col-1">
+        <div class="btn btn-success" data-toggle="new-course-session">New</div>
     </div>
 </div>
 

@@ -1,16 +1,13 @@
 package servlet.util;
 
-import com.google.gson.Gson;
 import entity.ClientEntity;
 import entity.CourseEntity;
 import entity.CourseSessionEntity;
 import entity.LocationEntity;
-import repository.*;
-import util.RedisProvider;
+import repository.BaseRepository;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.util.List;
 
 public class RedisInitializer implements ServletContextListener {
 

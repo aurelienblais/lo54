@@ -16,8 +16,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @WebServlet("/api/course_sessions")
 public class Collection extends HttpServlet {
@@ -38,7 +41,7 @@ public class Collection extends HttpServlet {
             }
         }
 
-        if(!StringUtils.isEmpty(request.getParameter("city"))) {
+        if (!StringUtils.isEmpty(request.getParameter("city"))) {
             cr.filterCity(Integer.parseInt(request.getParameter("city")));
         }
 
@@ -54,8 +57,16 @@ public class Collection extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         CourseSessionEntity obj = new CourseSessionEntity();
-        obj.setStartDate(Timestamp.valueOf(request.getParameter("start_date")));
-        obj.setEndDate(Timestamp.valueOf(request.getParameter("end_date")));
+        Date start_date = null;
+        Date end_date = null;
+        try {
+            start_date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.FRANCE).parse(request.getParameter("start_date"));
+            end_date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.FRANCE).parse(request.getParameter("end_date"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        obj.setStartDate(new Timestamp(start_date.getTime()));
+        obj.setEndDate(new Timestamp(end_date.getTime()));
         obj.setMax(Integer.valueOf(request.getParameter("max")));
         obj.setCourse(CourseRepository.getById(request.getParameter("course_code")));
         obj.setLocation(LocationRepository.getById(Integer.valueOf(request.getParameter("location_id"))));

@@ -40,6 +40,17 @@ public class CourseSessionRepository extends BaseRepository {
         return BaseRepository.getByIdFromDb(id, CourseSessionEntity.class);
     }
 
+    public void filterOutdated() {
+        Date today = new Date();
+        predicates.add(
+                cb.between(
+                        root.get("startDate"),
+                        today,
+                        new Date(today.getTime() + 31622400 * 10)
+                )
+        );
+    }
+
     public void filterSessionDate(String date) throws ParseException {
         Date parsed_date = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         predicates.add(

@@ -52,3 +52,46 @@
         <td>{{location.city}}</td>
     </tr>
 </script>
+
+<script id="course-session-new-template" type="text/x-handlebars-template">
+    <div class="modal" tabindex="-1" role="dialog" id="course-session-new-modal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Course Session</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="new-course-session-form" action="/api/course_sessions">
+                        <div class="form-group">
+                            <input name="start_date" class="form-control" placeholder="Start Date" type="datetime-local"/>
+                        </div>
+                        <div class="form-group">
+                            <input name="end_date" class="form-control" placeholder="End Date" type="datetime-local"/>
+                        </div>
+                        <div class="form-group">
+                            <input name="max" class="form-control" placeholder="Max" type="number" />
+                        </div>
+                        <div class="form-group">
+                            <select name="course_code" class="form-control">
+                                {{#each courses}}
+                                    <option value="{{code}}">{{title}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="location_id" class="form-control">
+                                {{#each locations}}
+                                    <option value="{{id}}">{{city}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="btn btn-sm btn-info pull-right" onclick="submitNewCourseSessionForm()" )>Submit</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

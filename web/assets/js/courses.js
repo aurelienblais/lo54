@@ -1,5 +1,6 @@
 const COURSE_ROW_TEMPLATE = Handlebars.compile($('#course-row-template').html());
 const COURSE_ITEM_TEMPLATE = Handlebars.compile($('#course-item-template').html());
+const COURSE_NEW_TEMPLATE = Handlebars.compile($('#course-new-template').html());
 
 let loadCourses = () => {
     $('#courses-container > .col-12').fadeToggle(100);
@@ -24,6 +25,30 @@ let showCourse = (id) => {
     $.getJSON(`/api/courses/${id}`, (data) => {
         $('body').append(COURSE_ITEM_TEMPLATE(data));
         $('#course-modal').modal('show');
+    });
+};
+
+$('[data-toggle="new-course"]').click( () => {
+   $('#course-new-modal').remove();
+   $('body').append(COURSE_NEW_TEMPLATE);
+   $('#course-new-modal').modal('show');
+});
+
+let submitNewCourseForm = () => {
+    $form = $('#course-form');
+    $.ajax({
+        type: "POST",
+        url: $form.attr('action'),
+        data: $form.serialize(),
+        success: function(data)
+        {
+            $('.modal').modal('hide');
+            toastr.success('Course creation', 'Course successfully created');
+            loadCourses();
+        },
+        error: function() {
+            toastr.error('Check if code is not already used.', 'Course creation failed')
+        }
     });
 };
 
