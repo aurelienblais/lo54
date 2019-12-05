@@ -6,6 +6,12 @@
             <button type="button" class="btn btn-sm btn-info" onclick="showCourse('{{code}}')">
                 <i class="far fa-eye"></i> {{courseSessions.length}} session(s)
             </button>
+            <button type="button" class="btn btn-sm btn-light" onclick="editCourse('{{code}}')">
+                <i class="far fa-edit"></i>
+            </button>
+            <button type="button" class="btn btn-sm btn-danger" onclick="deleteCourse('{{code}}')">
+                <i class="fas fa-times"></i>
+            </button>
         </td>
     </tr>
 </script>
@@ -76,7 +82,33 @@
                         <div class="form-group">
                             <input name="title" class="form-control" placeholder="Title"/>
                         </div>
-                        <div class="btn btn-sm btn-info pull-right" onclick="submitNewCourseForm()" )>Submit</div>
+                        <div class="btn btn-sm btn-info pull-right" onclick="submitNewCourseForm()">Submit</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="course-edit-template" type="text/x-handlebars-template">
+    <div class="modal" tabindex="-1" role="dialog" id="course-edit-modal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Course</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-course-form" action="/api/courses/{{code}}">
+                        <div class="form-group">
+                            <input name="code" class="form-control" placeholder="Code" value="{{code}}" disabled/>
+                        </div>
+                        <div class="form-group">
+                            <input name="title" class="form-control" placeholder="Title" value="{{title}}"/>
+                        </div>
+                        <div class="btn btn-sm btn-info pull-right" onclick="submitEditCourseForm()">Submit</div>
                     </form>
                 </div>
             </div>

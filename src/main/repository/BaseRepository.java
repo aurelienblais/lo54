@@ -22,10 +22,12 @@ import static redis.clients.jedis.ScanParams.SCAN_POINTER_START;
 
 public abstract class BaseRepository {
     static <T extends BaseEntity> T getById(Serializable id, Class target) {
-        if (RedisProvider.getSession().exists(target.getSimpleName() + "/" + id)) {
-            return fromRedis(target.getSimpleName() + "/" + id, target);
-        } else {
-            return getByIdFromDb(id, target);
+        try (Jedis jedis = RedisProvider.getPool().getResource()) {
+            if (jedis.exists(target.getSimpleName() + "/" + id)) {
+                return fromRedis(target.getSimpleName() + "/" + id, target);
+            } else {
+                return getByIdFromDb(id, target);
+            }
         }
     }
 
@@ -39,8 +41,7 @@ public abstract class BaseRepository {
     }
 
     static <T extends BaseEntity> List<T> getAll(Class target) {
-        Jedis jedis = RedisProvider.getSession();
-        try {
+        try (Jedis jedis = RedisProvider.getPool().getResource()) {
             List<T> list = new ArrayList<>();
             ScanParams scanParams = new ScanParams().count(100).match(target.getSimpleName() + "/*");
             String cur = SCAN_POINTER_START;
@@ -50,8 +51,6 @@ public abstract class BaseRepository {
                 cur = scanResult.getCursor();
             } while (!cur.equals(SCAN_POINTER_START));
             return list;
-        } finally {
-            jedis.close();
         }
     }
 
@@ -102,20 +101,14 @@ public abstract class BaseRepository {
     }
 
     public static void toRedis(BaseEntity obj) {
-        Jedis jedis = RedisProvider.getSession();
-        try {
+        try (Jedis jedis = RedisProvider.getPool().getResource()) {
             jedis.set(obj.getClass().getSimpleName() + "/" + obj.getId(), new Gson().toJson(obj));
-        } finally {
-            jedis.close();
         }
     }
 
     public static void delRedis(BaseEntity obj) {
-        Jedis jedis = RedisProvider.getSession();
-        try {
+        try (Jedis jedis = RedisProvider.getPool().getResource()) {
             jedis.del(obj.getClass().getSimpleName() + "/" + obj.getId());
-        } finally {
-            jedis.close();
         }
     }
 }

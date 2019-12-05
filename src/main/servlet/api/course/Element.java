@@ -2,6 +2,7 @@ package servlet.api.course;
 
 import com.google.gson.Gson;
 import entity.CourseEntity;
+import org.apache.maven.shared.utils.StringUtils;
 import repository.CourseRepository;
 import servlet.api.BaseElement;
 
@@ -29,7 +30,9 @@ public class Element extends BaseElement {
         PrintWriter out = response.getWriter();
 
         CourseEntity obj = CourseRepository.getById(request.getPathInfo().substring(1));
-        obj.setTitle(request.getParameter("title"));
+
+        if(!StringUtils.isEmpty(request.getParameter("title")))
+            obj.setTitle(request.getParameter("title"));
 
         obj = CourseRepository.save(obj);
         Gson gson = new Gson();
