@@ -42,11 +42,12 @@ public class CourseSessionRepository extends BaseRepository {
 
     public void filterOutdated() {
         Date today = new Date();
+        System.out.println(today.getTime());
         predicates.add(
                 cb.between(
                         root.get("startDate"),
                         today,
-                        new Date(today.getTime() + 31622400 * 10)
+                        new Date(today.getTime() + 31449600000L * 10)
                 )
         );
     }
@@ -84,11 +85,13 @@ public class CourseSessionRepository extends BaseRepository {
 
     public static CourseSessionEntity save(CourseSessionEntity obj) {
         BaseRepository.delRedis(obj.getCourse());
+        obj.getClients().forEach(BaseRepository::delRedis);
         return BaseRepository.save(obj);
     }
 
     public static void delete(CourseSessionEntity obj) {
         BaseRepository.delRedis(obj.getCourse());
+        obj.getClients().forEach(BaseRepository::delRedis);
         BaseRepository.delete(obj);
     }
 }

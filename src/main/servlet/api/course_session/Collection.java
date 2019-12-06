@@ -33,12 +33,14 @@ public class Collection extends HttpServlet {
         List<CourseSessionEntity> res;
         CourseSessionRepository cr = new CourseSessionRepository();
 
-        if (!StringUtils.isEmpty(request.getParameter("start_Date"))) {
+        if (!StringUtils.isEmpty(request.getParameter("start_date"))) {
             try {
                 cr.filterSessionDate(request.getParameter("start_date"));
             } catch (ParseException e) {
                 System.out.println("Failed to parse date: " + request.getParameter("date"));
             }
+        } else {
+            cr.filterOutdated();
         }
 
         if (!StringUtils.isEmpty(request.getParameter("city"))) {

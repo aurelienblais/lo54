@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import entity.CourseEntity;
 import org.apache.maven.shared.utils.StringUtils;
 import repository.CourseRepository;
+import servlet.api.BaseElement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -11,22 +11,22 @@
                 <div class="modal-body">
                     <form id="course-session-form" action="/api/clients">
                         <div class="form-group">
-                            <input name="lastname" class="form-control" placeholder="Lastname"/>
+                            <input name="lastname" class="form-control" placeholder="Lastname" required/>
                         </div>
                         <div class="form-group">
-                            <input name="firstname" class="form-control" placeholder="Firstname"/>
+                            <input name="firstname" class="form-control" placeholder="Firstname" required/>
                         </div>
                         <div class="form-group">
-                            <input name="address" class="form-control" placeholder="Address"/>
+                            <input name="address" class="form-control" placeholder="Address" required/>
                         </div>
                         <div class="form-group">
-                            <input name="phone" class="form-control" placeholder="Phone"/>
+                            <input name="phone" class="form-control" placeholder="Phone" required/>
                         </div>
                         <div class="form-group">
-                            <input name="email" class="form-control" placeholder="Email" type="email"/>
+                            <input name="email" class="form-control" placeholder="Email" type="email" required/>
                         </div>
                         <div class="form-group">
-                            <input name="course_session" type="hidden" value="{{code}}"/>
+                            <input name="course_session" type="hidden" value="{{code}}" required/>
                         </div>
 
                         <div class="btn btn-sm btn-info pull-right" onclick="submitCourseSessionForm()" )>Submit</div>
@@ -66,18 +66,18 @@
                 <div class="modal-body">
                     <form id="new-course-session-form" action="/api/course_sessions">
                         <div class="form-group">
-                            <input name="start_date" class="form-control" placeholder="Start Date" type="datetime-local"/>
+                            <input name="start_date" class="form-control" placeholder="Start Date" type="datetime-local" required />
                         </div>
                         <div class="form-group">
-                            <input name="end_date" class="form-control" placeholder="End Date" type="datetime-local"/>
+                            <input name="end_date" class="form-control" placeholder="End Date" type="datetime-local" required />
                         </div>
                         <div class="form-group">
-                            <input name="max" class="form-control" placeholder="Max" type="number" />
+                            <input name="max" class="form-control" placeholder="Max" type="number" required />
                         </div>
                         <div class="form-group">
                             <select name="course_code" class="form-control">
                                 {{#each courses}}
-                                    <option value="{{code}}">{{title}}</option>
+                                    <option value="{{code}}">{{code}} - {{title}}</option>
                                 {{/each}}
                             </select>
                         </div>

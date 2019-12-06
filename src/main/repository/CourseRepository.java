@@ -78,10 +78,12 @@ public class CourseRepository extends BaseRepository {
     }
 
     public static CourseEntity save(CourseEntity obj) {
+        obj.getCourseSessions().forEach(BaseRepository::delRedis);
         return BaseRepository.save(obj);
     }
 
     public static void delete(CourseEntity obj) {
+        obj.getCourseSessions().forEach(BaseRepository::delRedis);
         BaseRepository.delete(obj);
     }
 }

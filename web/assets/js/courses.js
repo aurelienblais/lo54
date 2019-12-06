@@ -86,7 +86,8 @@ let submitEditCourseForm = () => {
     $.ajax({
         type: "PATCH",
         url: $form.attr('action'),
-        data: $form.serialize(),
+        data: JSON.stringify($form.serializeFormJSON()),
+        dataType: 'json',
         success: function(data)
         {
             $('.modal').modal('hide');

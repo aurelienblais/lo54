@@ -37,6 +37,7 @@
 <script src="assets/js/jquery.typewatch.js"></script>
 <script src="assets/js/toastr.min.js"></script>
 
+<script src="assets/js/utils.js"></script>
 <script src="assets/js/courses.js"></script>
 <script src="assets/js/course_sessions.js"></script>
 <script src="assets/js/global.js"></script>
