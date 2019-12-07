@@ -16,3 +16,19 @@
         return o;
     };
 })(jQuery);
+
+let updateURI = (data, location) => {
+    window.history.replaceState({ data },
+        'Super Duper School',
+        window.document.location.origin + '/' + location + ($.param(data) ? '?' + $.param(data) : '')
+    );
+};
+
+let getURI = () => {
+    if (document.location.search !== "")
+        return JSON.parse('{"' + decodeURI(document.location.search.substr(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"').replace(/\s/g,'') + '"}')
+};
+
+let getPath = () => {
+    return document.location.pathname.substr(1);
+};

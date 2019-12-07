@@ -4,6 +4,15 @@ const COURSE_NEW_TEMPLATE = Handlebars.compile($('#course-new-template').html())
 const COURSE_EDIT_TEMPLATE = Handlebars.compile($('#course-edit-template').html());
 
 let loadCourses = () => {
+    uri = getURI();
+
+    if (uri) {
+        $('#courses-filter-code').val(uri.code);
+        $('#courses-filter-name').val(uri.name);
+        $('#courses-filter-date').val(uri.date);
+        $('#courses-filter-location').val(uri.location);
+    }
+
     $('#courses-container > .col-12').fadeToggle(100);
     $('#courses-list').empty();
     const filters = {
@@ -18,6 +27,16 @@ let loadCourses = () => {
         });
         $('#courses-container > .col-12').fadeToggle(100);
     });
+};
+
+let searchCourses = () => {
+    updateURI({
+        code: $('#courses-filter-code').val(),
+        title: $('#courses-filter-name').val(),
+        date: $('#courses-filter-date').val(),
+        city: $('#courses-filter-location').val()
+    }, 'courses');
+    loadCourses();
 };
 
 let showCourse = (id) => {
@@ -43,24 +62,22 @@ let deleteCourse = (id) => {
         $.ajax({
             type: "DELETE",
             url: "/api/courses/" + id,
-            success: function(data)
-            {
+            success: function (data) {
                 toastr.success('Course deleted', 'Course successfully deleted');
                 loadCourses();
             },
-            error: function() {
+            error: function () {
                 toastr.error('Course deletion failed')
             }
         });
     }
 };
 
-$('[data-toggle="new-course"]').click( () => {
-   $('#course-new-modal').remove();
-   $('body').append(COURSE_NEW_TEMPLATE);
-   $('#course-new-modal').modal('show');
+$('[data-toggle="new-course"]').click(() => {
+    $('#course-new-modal').remove();
+    $('body').append(COURSE_NEW_TEMPLATE);
+    $('#course-new-modal').modal('show');
 });
-
 
 
 let submitNewCourseForm = () => {
@@ -69,13 +86,12 @@ let submitNewCourseForm = () => {
         type: "POST",
         url: $form.attr('action'),
         data: $form.serialize(),
-        success: function(data)
-        {
+        success: function (data) {
             $('.modal').modal('hide');
             toastr.success('Course creation', 'Course successfully created');
             loadCourses();
         },
-        error: function() {
+        error: function () {
             toastr.error('Check if code is not already used.', 'Course creation failed')
         }
     });
@@ -88,21 +104,20 @@ let submitEditCourseForm = () => {
         url: $form.attr('action'),
         data: JSON.stringify($form.serializeFormJSON()),
         dataType: 'json',
-        success: function(data)
-        {
+        success: function (data) {
             $('.modal').modal('hide');
             toastr.success('Course edit', 'Course successfully edited');
             loadCourses();
         },
-        error: function() {
+        error: function () {
             toastr.error('Course edit failed')
         }
     });
 };
 
 $(() => {
-    $('#courses-filter-code, #courses-filter-name, #courses-filter-date').typeWatch({callback: loadCourses});
+    $('#courses-filter-code, #courses-filter-name, #courses-filter-date').typeWatch({callback: searchCourses});
     $('#courses-filter-location').change(() => {
-        loadCourses()
+        searchCourses()
     });
 });

@@ -40,8 +40,8 @@
 <script id="course-session-row-template" type="text/x-handlebars-template">
     <tr>
         <th scope="row">{{course.code}} - {{course.title}}</th>
-        <td>{{startDate}}</td>
-        <td>{{endDate}}</td>
+        <td>{{dateFormat startDate}}</td>
+        <td>{{dateFormat endDate}}</td>
         <td>
             <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: {{percentage clients.length max}}%">

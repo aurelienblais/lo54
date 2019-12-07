@@ -52,6 +52,14 @@ let submitNewCourseSessionForm = () => {
 };
 
 let loadSessions = () => {
+    uri = getURI();
+
+    if (uri) {
+        $('#course-sessions-filter-code').val(uri.code);
+        $('#course-sessions-filter-date').val(uri.start_date);
+        $('#course-sessions-filter-location').val(uri.location);
+    }
+
     $('#sessions-container > .col-12').fadeToggle(100);
     $('#sessions-list').empty();
     const filters = {
@@ -67,9 +75,18 @@ let loadSessions = () => {
     });
 };
 
+let searchSessions = () => {
+    updateURI({
+        code: $('#course-sessions-filter-code').val(),
+        start_date: $('#course-sessions-filter-date').val(),
+        city: $('#course-sessions-filter-location').val()
+    }, 'course_sessions');
+    loadSessions();
+};
+
 $(() => {
-    $('#course-sessions-filter-code, #course-sessions-filter-date').typeWatch({callback: loadSessions});
+    $('#course-sessions-filter-code, #course-sessions-filter-date').typeWatch({callback: searchSessions});
     $('#course-sessions-filter-location').change(() => {
-        loadSessions()
+        searchSessions()
     });
 });

@@ -35,7 +35,8 @@ Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
 });
 
 $(() => {
-    loadCourses();
+    let path = getPath() || 'courses';
+    $('[href="#' + path + '"]').click();
 
 
     $.getJSON('/api/locations', (data) => {
@@ -48,9 +49,11 @@ $(() => {
         switch(e.target.innerHTML.toLowerCase()) {
             case "courses":
                 loadCourses();
+                updateURI(null, 'courses');
                 break;
             case "sessions":
-                loadSessions()
+                loadSessions();
+                updateURI(null, 'course_sessions');
                 break;
             default:
                 break;
