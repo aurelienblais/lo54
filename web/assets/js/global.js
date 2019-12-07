@@ -36,7 +36,8 @@ Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
 
 $(() => {
     let path = getPath() || 'courses';
-    $('[href="#' + path + '"]').click();
+    $('.nav-link').removeClass('active');
+    $('[href="#' + path + '"]').click().addClass('active');
 
 
     $.getJSON('/api/locations', (data) => {
@@ -46,16 +47,19 @@ $(() => {
     });
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $('.nav-link').removeClass('active');
+        $('[href="#' + e.target.innerHTML.toLocaleLowerCase() + '"]').addClass('active');
         switch(e.target.innerHTML.toLowerCase()) {
             case "courses":
-                loadCourses();
-                updateURI(null, 'courses');
+                loadCourses(true);
+                updateURI(getURI(), 'courses');
                 break;
             case "sessions":
-                loadSessions();
-                updateURI(null, 'course_sessions');
+                loadSessions(true);
+                updateURI(getURI(), 'course_sessions');
                 break;
             default:
+                loadCourses();
                 break;
         }
     });

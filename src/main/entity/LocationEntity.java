@@ -54,7 +54,7 @@ public class LocationEntity extends BaseEntity implements Serializable {
         return result;
     }
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "location", cascade=CascadeType.REMOVE)
     public Collection<CourseSessionEntity> getCourseSessions() {
         return courseSessions;
     }

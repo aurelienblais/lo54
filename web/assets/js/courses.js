@@ -3,14 +3,14 @@ const COURSE_ITEM_TEMPLATE = Handlebars.compile($('#course-item-template').html(
 const COURSE_NEW_TEMPLATE = Handlebars.compile($('#course-new-template').html());
 const COURSE_EDIT_TEMPLATE = Handlebars.compile($('#course-edit-template').html());
 
-let loadCourses = () => {
+let loadCourses = (update = false) => {
     uri = getURI();
 
-    if (uri) {
+    if (uri && update) {
         $('#courses-filter-code').val(uri.code);
-        $('#courses-filter-name').val(uri.name);
+        $('#courses-filter-name').val(uri.title);
         $('#courses-filter-date').val(uri.date);
-        $('#courses-filter-location').val(uri.location);
+        $('#courses-filter-location').val(uri.city);
     }
 
     $('#courses-container > .col-12').fadeToggle(100);

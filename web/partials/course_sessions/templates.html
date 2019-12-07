@@ -44,12 +44,18 @@
         <td>{{dateFormat endDate}}</td>
         <td>
             <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: {{percentage clients.length max}}%">
-                    {{clients.length}}/{{max}}
-                </div>
+                <div class="progress-bar" role="progressbar" style="width: {{percentage clients.length max}}%"></div>
             </div>
         </td>
         <td>{{location.city}}</td>
+        <td>
+            <button type="button" class="btn btn-sm btn-info" onclick="showSession('{{id}}')">
+                <i class="far fa-eye"></i>
+            </button>
+            <button type="button" class="btn btn-sm btn-danger" onclick="deleteSession('{{id}}')">
+                <i class="fas fa-times"></i>
+            </button>
+        </td>
     </tr>
 </script>
 
@@ -66,30 +72,73 @@
                 <div class="modal-body">
                     <form id="new-course-session-form" action="/api/course_sessions">
                         <div class="form-group">
-                            <input name="start_date" class="form-control" placeholder="Start Date" type="datetime-local" required />
+                            <input name="start_date" class="form-control" placeholder="Start Date" type="datetime-local"
+                                   required/>
                         </div>
                         <div class="form-group">
-                            <input name="end_date" class="form-control" placeholder="End Date" type="datetime-local" required />
+                            <input name="end_date" class="form-control" placeholder="End Date" type="datetime-local"
+                                   required/>
                         </div>
                         <div class="form-group">
-                            <input name="max" class="form-control" placeholder="Max" type="number" required />
+                            <input name="max" class="form-control" placeholder="Max" type="number" required/>
                         </div>
                         <div class="form-group">
                             <select name="course_code" class="form-control">
                                 {{#each courses}}
-                                    <option value="{{code}}">{{code}} - {{title}}</option>
+                                <option value="{{code}}">{{code}} - {{title}}</option>
                                 {{/each}}
                             </select>
                         </div>
                         <div class="form-group">
                             <select name="location_id" class="form-control">
                                 {{#each locations}}
-                                    <option value="{{id}}">{{city}}</option>
+                                <option value="{{id}}">{{city}}</option>
                                 {{/each}}
                             </select>
                         </div>
-                        <div class="btn btn-sm btn-info pull-right" onclick="submitNewCourseSessionForm()" )>Submit</div>
+                        <div class="btn btn-sm btn-info pull-right" onclick="submitNewCourseSessionForm()" )>Submit
+                        </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="course-session-template" type="text/x-handlebars-template">
+    <div class="modal" tabindex="-1" role="dialog" id="course-session-modal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{course.code}} - {{course.title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4>{{dateFormat startDate}} - {{dateFormat endDate}}</h4>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Lastname</th>
+                            <th scope="col">Firstname</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each clients}}
+                        <tr>
+                            <th scope="row">{{lastname}}</th>
+                            <td>{{firstname}}</td>
+                            <td>{{address}}</td>
+                            <td>{{phone}}</td>
+                            <td>{{email}}</td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

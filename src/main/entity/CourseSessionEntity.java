@@ -93,7 +93,7 @@ public class CourseSessionEntity extends BaseEntity implements Serializable {
         this.course = course;
     }
 
-    @OneToMany(mappedBy = "courseSession")
+    @OneToMany(mappedBy = "courseSession", cascade=CascadeType.REMOVE)
     public Collection<ClientEntity> getClients() {
         return clients;
     }

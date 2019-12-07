@@ -61,7 +61,7 @@ public class CourseEntity extends BaseEntity implements Serializable {
         return result;
     }
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", cascade=CascadeType.REMOVE)
     @Where(clause = "start_date > current_date")
     public Collection<CourseSessionEntity> getCourseSessions() {
         return courseSessions;

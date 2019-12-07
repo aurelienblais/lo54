@@ -1,6 +1,7 @@
 const COURSE_SESSION_ROW_TEMPLATE = Handlebars.compile($('#course-session-row-template').html());
 const COURSE_SESSION_REGISTER_TEMPLATE = Handlebars.compile($('#course-session-create-template').html());
 const COURSE_SESSION_NEW_TEMPLATE = Handlebars.compile($('#course-session-new-template').html());
+const COURSE_SESSION_TEMPLATE = Handlebars.compile($('#course-session-template').html());
 
 let registerCourseSession = (id) => {
     $('body').append(COURSE_SESSION_REGISTER_TEMPLATE({code: id}));
@@ -51,21 +52,19 @@ let submitNewCourseSessionForm = () => {
     });
 };
 
-let loadSessions = () => {
+let loadSessions = (update = false) => {
     uri = getURI();
 
-    if (uri) {
-        $('#course-sessions-filter-code').val(uri.code);
-        $('#course-sessions-filter-date').val(uri.start_date);
-        $('#course-sessions-filter-location').val(uri.location);
+    if (uri && update) {
+        $('#courses-sessions-filter-date').val(uri.start_date);
+        $('#courses-sessions-filter-location').val(uri.city);
     }
 
     $('#sessions-container > .col-12').fadeToggle(100);
     $('#sessions-list').empty();
     const filters = {
-        code: $('#course-sessions-filter-code').val(),
-        start_date: $('#course-sessions-filter-date').val(),
-        city: $('#course-sessions-filter-location').val()
+        start_date: $('#courses-sessions-filter-date').val(),
+        city: $('#courses-sessions-filter-location').val()
     };
     $.getJSON('/api/course_sessions', filters, (data) => {
         data.forEach((row) => {
@@ -77,16 +76,40 @@ let loadSessions = () => {
 
 let searchSessions = () => {
     updateURI({
-        code: $('#course-sessions-filter-code').val(),
-        start_date: $('#course-sessions-filter-date').val(),
-        city: $('#course-sessions-filter-location').val()
+        start_date: $('#courses-sessions-filter-date').val(),
+        city: $('#courses-sessions-filter-location').val()
     }, 'course_sessions');
     loadSessions();
 };
 
+let showSession = (id) => {
+    $('.modal').modal('hide');
+    $('.modal').remove();
+    $.getJSON(`/api/course_sessions/${id}`, (data) => {
+        $('body').append(COURSE_SESSION_TEMPLATE(data));
+        $('#course-session-modal').modal('show');
+    });
+};
+
+let deleteSession = (id) => {
+    if (confirm("Are you sure?")) {
+        $.ajax({
+            type: "DELETE",
+            url: "/api/course_sessions/" + id,
+            success: function (data) {
+                toastr.success('Course session deleted', 'Course session successfully deleted');
+                loadSessions();
+            },
+            error: function () {
+                toastr.error('Course session deletion failed')
+            }
+        });
+    }
+};
+
 $(() => {
-    $('#course-sessions-filter-code, #course-sessions-filter-date').typeWatch({callback: searchSessions});
-    $('#course-sessions-filter-location').change(() => {
+    $('#courses-sessions-filter-date').typeWatch({callback: searchSessions});
+    $('#courses-sessions-filter-location').change(() => {
         searchSessions()
     });
 });

@@ -6,22 +6,28 @@
     <title>Super Duper School</title>
 
 </head>
-<body class="bg-light">
-<div class="container">
-    <ul class="nav nav-tabs">
+<body>
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Super Duper School</a>
+    <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link active" href="#courses" data-toggle="tab">Courses</a>
+            <a class="nav-link" href="#courses" data-toggle="tab">Courses</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#course_sessions" data-toggle="tab">Sessions</a>
         </li>
     </ul>
-    <div class="tab-content">
-        <div class="tab-pane fade show active" id="courses">
-            <%@ include file="partials/courses/list.jsp" %>
-        </div>
-        <div class="tab-pane fade" id="course_sessions">
-            <%@ include file="partials/course_sessions/list.jsp" %>
+</nav>
+
+<div class="container" style="margin-top: 110px">
+    <div class="card">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="courses">
+                <%@ include file="partials/courses/list.jsp" %>
+            </div>
+            <div class="tab-pane fade" id="course_sessions">
+                <%@ include file="partials/course_sessions/list.jsp" %>
+            </div>
         </div>
     </div>
 </div>

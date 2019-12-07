@@ -42,7 +42,6 @@ public class CourseSessionRepository extends BaseRepository {
 
     public void filterOutdated() {
         Date today = new Date();
-        System.out.println(today.getTime());
         predicates.add(
                 cb.between(
                         root.get("startDate"),
